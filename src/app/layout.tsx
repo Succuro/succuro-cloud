@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, DM_Mono, Figtree } from "next/font/google";
+import { CloudAnalytics } from "@/components/cloud/cloud-analytics";
+import { isCloudService } from "@/components/cloud/cloud-service";
 import { BRAND } from "@/domain/brand";
 import "./globals.css";
 
@@ -26,7 +28,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${sans.variable} ${heading.variable} ${mono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        {isCloudService() && <CloudAnalytics />}
+      </body>
     </html>
   );
 }
